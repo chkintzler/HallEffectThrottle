@@ -215,20 +215,6 @@ void autoCalibrate()
         if(allCalibrated)
             break;
     }
-    /*//debugging
-    Serial.println();
-    for (int i = 0; i < 7; ++i)
-    {
-        Serial.print(i);
-        Serial.print(": ");
-        Serial.print(tradePoint[i][0]);
-        Serial.print(" ");
-        Serial.print(tradePoint[i][1]);
-        Serial.print(" | ");
-    }
-    Serial.println();
-    delay(2000);
-    */
     startCalibration = false;
 
     for(int i = 0; i < 7; ++i)
