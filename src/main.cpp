@@ -1,9 +1,9 @@
 #include <Arduino.h>
 #include <SPI.h>
 #include <Wire.h>
-#include "MegaJoy.h"
+//#include "MegaJoy.h"
 #include "Encoder.h"
-megaJoyControllerData_t getControllerData(void);
+//megaJoyControllerData_t getControllerData(void);
 void printAllValues();
 int16_t getAbsolutePosition();
 int16_t getHallValue(byte sensor);
@@ -72,17 +72,17 @@ void setup()
     attachInterrupt(digitalPinToInterrupt(BUTTONPIN), ButtonPinISR, CHANGE);
 
     trim.write(2048);
-    setupMegaJoy();
-    //Serial.begin(115200);
+    //setupMegaJoy();
+    Serial.begin(115200);
 }
 
 void loop()
 {
-    noInterrupts();
+    /*noInterrupts();
      megaJoyControllerData_t controllerData = getControllerData();
      setControllerData(controllerData);
-     interrupts();
-    
+    interrupts();
+    */
     if(startCalibration)
         autoCalibrate();
     if (encoderButton)
@@ -91,8 +91,8 @@ void loop()
         encoderButton = false;
     }
 
-    //Serial.println(getAbsolutePosition());
-   //delay(15);
+    Serial.println(getAbsolutePosition());
+   delay(15);
 }
 
 void EncoderButtonISR()
@@ -123,7 +123,7 @@ void ButtonPinISR()
 }
 
 
-
+/*
 megaJoyControllerData_t getControllerData(void)
 {
     megaJoyControllerData_t controllerData = getBlankDataForMegaController();
@@ -132,7 +132,7 @@ megaJoyControllerData_t getControllerData(void)
     controllerData.buttonArray[0] = button;
     return controllerData;
 }
-
+**/
 void printAllValues()
 {
     sensorSnapShot();
@@ -151,7 +151,7 @@ int16_t getAbsolutePosition()
     bool positive = currentReadings[currentHall] >= 0 && currentHall != 0;//prevents 0hall being positive but allows it going to 0
     float position = positionValues[((6 - currentHall) * 2 + positive) - 1];
 
-    if (positive)
+    if (positive)//positive being north pole of magnet
     {
         position += (current / ((float)hallTradePoints[currentHall][positive])) * stepSize;
     }
