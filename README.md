@@ -1,0 +1,2 @@
+Using the Arduino framework and Teensy hardware this project uses 7 ratiometric hall effect sensors to achieve millimeter accuracy and absolute position. By using a single moving magnet under the handle each hall effect senor is able to measure the stength of the magnetic field and pinpoint the location of said magnet with unparalleled accuracy and repeatability. Along with a rotary encoder and extra button for use in flight simulator software.![frontView](https://github.com/user-attachments/assets/4db92e42-f203-4cea-819e-578d254958a4)
+
