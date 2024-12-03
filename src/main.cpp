@@ -72,16 +72,16 @@ void setup()
     attachInterrupt(digitalPinToInterrupt(BUTTONPIN), ButtonPinISR, CHANGE);
 
     trim.write(2048);
-    ///setupMegaJoy();
-    Serial.begin(115200);
+    setupMegaJoy();
+    //Serial.begin(115200);
 }
 
 void loop()
 {
-    //noInterrupts();
-     //megaJoyControllerData_t controllerData = getControllerData();
-     //setControllerData(controllerData);
-     //interrupts();
+    noInterrupts();
+     megaJoyControllerData_t controllerData = getControllerData();
+     setControllerData(controllerData);
+     interrupts();
     
     if(startCalibration)
         autoCalibrate();
@@ -91,8 +91,8 @@ void loop()
         encoderButton = false;
     }
 
-    Serial.println(getAbsolutePosition());
-   delay(15);
+    //Serial.println(getAbsolutePosition());
+   //delay(15);
 }
 
 void EncoderButtonISR()
@@ -159,7 +159,7 @@ int16_t getAbsolutePosition()
     {
         position += stepSize - (current / ((float)hallTradePoints[currentHall][positive])) * stepSize;
     }
-    return (int16_t)constrain(position,0,65535);
+    return (int16_t)constrain(position,0,bitSize);
 }
 
 int16_t getHallValue(byte sensor)
