@@ -1,3 +1,8 @@
+/*
+* Created by: Cameron Kintzler
+* Rotary Encoder created by: Paul Stoffregen
+*
+*/
 #include <Arduino.h>
 #include <Wire.h>
 #include "Encoder.h"
@@ -30,7 +35,7 @@ int16_t tradePoint[][2] = {{0, -1},
 byte lastHall = -1;
 
 int16_t currentReadings[7];
-float positionValues[12];
+float positionValues[12];//7 sensors 12 north and south poles
 
 // preconfigured calibration points
 int16_t hallTradePoints[][2] = {{432, 432},
